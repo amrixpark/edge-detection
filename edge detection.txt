@@ -1,0 +1,86 @@
+import cv2
+import numpy as np
+
+img=cv2.imread(r"D:\img downloaded\money.jpg")
+gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+canny=cv2.Canny(gray,150,200)
+#cv2.imshow("canny",canny)
+#cv2.imshow("real",img)
+
+# erosion
+
+kernel=np.ones((1,1),np.uint8)
+erode_image=cv2.erode(canny,kernel, iterations=1)
+#cv2.imshow("erode_image",erode_image)
+
+# erosion and dilation
+
+kernel=np.ones((5,5), np.uint8)
+# dilation
+dilate_image=cv2.dilate(canny,kernel,iterations=1)
+#cv2.imshow("dilate_image",dilate_image)
+
+
+
+display=np.hstack((canny,dilate_image,erode_image))
+#cv2.imshow("display",display)
+show=np.vstack((gray,canny))
+cv2.imshow("show",show)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+# edge detection
+
+import cv2
+import numpy as np
+
+img=cv2.imread(r"C:\Users\AMRIX\Downloads\liz.jpg")
+res=cv2.resize(img,(500,400))
+cv2.imshow("resizedpic",res)
+gray=cv2.cvtColor(res,cv2.COLOR_BGR2GRAY) 
+canny=cv2.Canny(gray,150,200)
+#cv2.imshow("canny", canny)
+#cv2.imshow("gray", gray)
+
+
+# erosion
+kernel=np.ones((1,1),np.uint8)
+erode_image=cv2.erode(canny,kernel,iterations=1)
+#cv2.imshow("EI",erode_image)
+
+# erosion and dilation
+kernel=np.ones((5,5),np.uint8)
+dilate_image=cv2.dilate(canny,kernel,iterations=1)
+#cv2.imshow("DI",dilate_image)
+
+display=np.vstack((erode_image,dilate_image))
+cv2.imshow("display", display)
+
+
+
+import cv2
+import numpy as np
+
+img=cv2.imread(r"C:\Users\AMRIX\Downloads\wh.jpg")
+res=cv2.resize(img,(500,350))
+cv2.imshow("img",res)
+gray=cv2.cvtColor(res,cv2.COLOR_BGR2GRAY)
+#cv2.imshow("gray",gray)
+canny=cv2.Canny(gray,100,100)
+#cv2.imshow("canny",canny)
+
+#erosion
+k=np.ones((1,1), np.uint8)
+EI=cv2.erode(canny,k,iterations=1)
+#cv2.imshow("EI",EI)
+
+k=np.ones((5,5),np.uint8)
+DI=cv2.dilate(canny,k,iterations=1)
+#cv2.imshow("DI",DI)
+
+dis=np.hstack((EI,DI))
+cv2.imshow("display",dis)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
